@@ -3587,6 +3587,39 @@ metaMonitoring:
     # -- ServiceMonitor will use these tlsConfig settings to make the health check requests
     tlsConfig: null
 
+  # PodMonitor configuration for monitoring Kubernetes Services with Prometheus Operator and/or Grafana Agent
+  podMonitor:
+    # -- If enabled, PodMonitor resources for Prometheus Operator are created
+    enabled: false
+    # -- To disable setting a 'cluster' label in metrics, set to 'null'.
+    # To overwrite the 'cluster' label with your own value, set to a non-empty string.
+    # Keep empty string "" to have the default value in the 'cluster' label, which is the helm release name for Mimir and the actual cluster name for Enterprise Metrics.
+    clusterLabel: ""
+    # -- Alternative namespace for PodMonitor resources
+    # If left unset, the default is to install the PodMonitor resources in the namespace where the chart is installed, i.e. the namespace specified for the helm command.
+    namespace: null
+    # -- Namespace selector for PodMonitor resources
+    # If left unset, the default is to select the namespace where the chart is installed, i.e. the namespace specified for the helm command.
+    namespaceSelector: null
+    # -- PodMonitor annotations
+    annotations: {}
+    # -- Additional PodMonitor labels
+    labels: {}
+    # -- PodMonitor scrape interval
+    interval: null
+    # -- PodMonitor scrape timeout in Go duration format (e.g. 15s)
+    scrapeTimeout: null
+    # -- PodMonitor relabel configs to apply to targets before scraping
+    # https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#monitoring.coreos.com/v1.RelabelConfig
+    relabelings: []
+    # -- PodMonitor metric relabel configs to apply to samples before ingestion
+    # https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#monitoring.coreos.com/v1.RelabelConfig
+    metricRelabelings: []
+    # -- PodMonitor will use http by default, but you can pick https as well
+    scheme: http
+    # -- PodMonitor will use these tlsConfig settings to make the health check requests
+    tlsConfig: null
+
   # Rules for the Prometheus Operator
   prometheusRule:
     # -- If enabled, a PrometheusRule resource for Prometheus Operator is created
